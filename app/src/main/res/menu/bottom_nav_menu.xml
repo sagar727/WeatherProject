@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_weather"
+        android:icon="@drawable/baseline_wb_twilight_24"
+        android:title="@string/title_weather" />
+
+    <item
+        android:id="@+id/navigation_cities"
+        android:icon="@drawable/baseline_apartment_24"
+        android:title="@string/title_cities" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/baseline_settings_24"
+        android:title="@string/title_settings" />
+
+</menu>

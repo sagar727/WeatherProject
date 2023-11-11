@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WeatherProject</string>
+    <string name="title_weather">Weather</string>
+    <string name="title_cities">Cities</string>
+    <string name="title_settings">Settings</string>
+    <string name="apiKey">3b4bf688673b4f32bff235820231907</string>
+</resources>
