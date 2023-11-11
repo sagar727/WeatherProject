@@ -1,4 +1,4 @@
-package com.example.weatherproject
+package com.example.weatherproject.network
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
