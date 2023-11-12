@@ -3,17 +3,12 @@ package com.example.weatherproject
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.weatherproject.databinding.ActivityMainBinding
-import com.example.weatherproject.ui.cities.CitiesFragment
-import com.example.weatherproject.ui.settings.SettingsFragment
-import com.example.weatherproject.ui.weather.WeatherFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,7 +32,8 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.navigation_weather,
                 R.id.navigation_cities,
-                R.id.navigation_settings
+                R.id.settingsFragment,
+                R.id.about_fragment
             )
         )
 
@@ -54,7 +50,11 @@ class MainActivity : AppCompatActivity() {
                     NavigationUI.onNavDestinationSelected(it,navController)
                 }
 
-                R.id.navigation_settings -> {
+                R.id.settingsFragment -> {
+                    NavigationUI.onNavDestinationSelected(it,navController)
+                }
+
+                R.id.about_fragment -> {
                     NavigationUI.onNavDestinationSelected(it,navController)
                 }
 

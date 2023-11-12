@@ -15,22 +15,36 @@
             app:destination="@id/navigation_cities"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_navigation_weather_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_navigation_weather_to_aboutFragment"
+            app:destination="@id/about_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_cities"
         android:name="com.example.weatherproject.ui.cities.CitiesFragment"
         android:label="@string/title_cities"
-        tools:layout="@layout/fragment_cities">
-        <action
-            android:id="@+id/action_navigation_cities_to_navigation_settings"
-            app:destination="@id/navigation_settings" />
-    </fragment>
+        tools:layout="@layout/fragment_cities"/>
 
     <fragment
-        android:id="@+id/navigation_settings"
+        android:id="@+id/settingsFragment"
         android:name="com.example.weatherproject.ui.settings.SettingsFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" >
+        android:label="Settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_navigation_weather"
+            app:destination="@id/navigation_weather" />
     </fragment>
+    <fragment
+        android:id="@+id/about_fragment"
+        android:name="com.example.weatherproject.ui.about.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about">
+        <action
+            android:id="@+id/action_aboutFragment_to_navigation_weather"
+            app:destination="@id/navigation_weather" />
+    </fragment>
+
 </navigation>

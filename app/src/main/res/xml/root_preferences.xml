@@ -1,0 +1,43 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreferenceCompat
+        app:icon="@drawable/baseline_device_thermostat_24"
+        app:key="temperature_unit"
+        app:summaryOff="Currently Using: Celsius"
+        app:summaryOn="Current Using: Fahrenheit"
+        app:title="Temperature Unit" />
+
+    <SwitchPreferenceCompat
+        app:icon="@drawable/airwave_24"
+        app:key="wind_unit"
+        app:summaryOff="Currently Using: KM"
+        app:summaryOn="Current Using: Miles"
+        app:title="Wind Unit" />
+
+    <SwitchPreferenceCompat
+        app:icon="@drawable/baseline_compress_24"
+        app:key="pressure_unit"
+        app:summaryOff="Currently Using: Inch"
+        app:summaryOn="Current Using: Mb"
+        app:title="Pressure Unit" />
+
+    <SwitchPreferenceCompat
+        app:icon="@drawable/rainy_24"
+        app:key="precipitation_unit"
+        app:summaryOff="Currently Using: MM"
+        app:summaryOn="Current Using: Inch"
+        app:title="Precipitation Unit" />
+
+    <SwitchPreferenceCompat
+        app:icon="@drawable/baseline_visibility_24"
+        app:key="visibility_unit"
+        app:summaryOff="Currently Using: KM"
+        app:summaryOn="Current Using: Miles"
+        app:title="Visibility Unit" />
+
+    <SwitchPreferenceCompat
+        app:icon="@drawable/air_24"
+        app:key="gust_unit"
+        app:summaryOff="Currently Using: KM"
+        app:summaryOn="Current Using: Miles"
+        app:title="Gust Unit" />
+</PreferenceScreen>
