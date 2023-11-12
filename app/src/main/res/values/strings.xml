@@ -20,4 +20,25 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="about">About</string>
+
+<!--    Weather Fragment-->
+
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="precipitation">Precipitation</string>
+    <string name="visibility">Visibility</string>
+    <string name="humidity">Humidity</string>
+    <string name="gust">Gust</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="gustimage">GustImage</string>
+    <string name="humidityimage">HumidityImage</string>
+    <string name="visibilityimage">VisibilityImage</string>
+    <string name="locationimage">LocationImage</string>
+    <string name="iconimage">IconImage</string>
+    <string name="precipitationimage">PrecipitationImage</string>
+    <string name="pressureimage">PressureImage</string>
+    <string name="windimage">WindImage</string>
+    <string name="searchimage">SearchImage</string>
+    <string name="city">City</string>
+
 </resources>

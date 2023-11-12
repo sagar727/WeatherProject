@@ -19,7 +19,6 @@ class CitiesFragment : Fragment() {
     lateinit var viewModel: CitiesViewModel
     lateinit var adapter: CitiesAdapter
 
-    //dummy array for place
     var place = ArrayList<String>()
     private val binding get() = _binding!!
 
@@ -36,24 +35,21 @@ class CitiesFragment : Fragment() {
 
         val key = getString(R.string.apiKey)
 
-        val sharedPreferences = context?.getSharedPreferences("CITY_PREF", Context.MODE_PRIVATE)
-
         binding.recycler.layoutManager = LinearLayoutManager(context)
 
         // Initialize cityArray here
         cityArray = ArrayList()
 
-        place = viewModel.getcities(requireContext())
+        place = viewModel.getCities(requireContext())
 
         for (city in place) {
-            viewModel.getCityData(RetrofitProvider.retrofit, key, city)
+            viewModel.getCityData(requireContext(), key, city)
         }
         listenLiveData()
         cityArray?.clear()
         return root
     }
     private fun listenLiveData() {
-
         viewModel.cityList.observe(viewLifecycleOwner) { cities ->
             cityArray = cities
             adapter = CitiesAdapter(requireContext(), cityArray)

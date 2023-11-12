@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.location.LocationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -54,6 +55,7 @@ class WeatherFragment : Fragment() {
             val loc = binding.loctionET.text.toString()
             if(loc.isNotEmpty()){
                 weatherViewModel.getWeather(RetrofitProvider.retrofit,repository,key,loc)
+                binding.loctionET.text?.clear()
             }else{
                 Toast.makeText(context,"Please insert city!!",Toast.LENGTH_SHORT).show()
             }
@@ -63,17 +65,9 @@ class WeatherFragment : Fragment() {
             getLocation()
         }
 
-
-
         binding.favBtn.setOnClickListener {
             val city = binding.locText.text.toString().trim()
             weatherViewModel.addCity(requireContext(), city)
-        //         val cityArray: MutableList<String>? = null
- //           cityArray?.add(city)
-//            val sharedPref = context?.getSharedPreferences("CITY_PREF",Context.MODE_PRIVATE)
-//            val editor = sharedPref?.edit()
-//            editor?.putStringSet("cities", cityArray as MutableSet<String>)
-//            editor?.commit()
         }
 
         listenLiveData()
@@ -144,30 +138,64 @@ class WeatherFragment : Fragment() {
     }
 
     private fun listenLiveData(){
-        //TODO: Use SharedPrefs to change KM/Miles etc.....
         sharedPreferences = context?.let { PreferenceManager.getDefaultSharedPreferences(it) }!!
-        val tempUnit = sharedPreferences?.getBoolean("temperature_unit",  false)
-        val windUnit = sharedPreferences?.getBoolean("wind_unit",  false)
-        val pressureUnit = sharedPreferences?.getBoolean("pressure_unit",  false)
-        val precipitationUnit = sharedPreferences?.getBoolean("precipitation_unit",  false)
-        val visibilityUnit = sharedPreferences?.getBoolean("visibility_unit",  false)
-        val gustUnit = sharedPreferences?.getBoolean("gust_unit",  false)
-        Toast.makeText(context, "$tempUnit Fetched from SP", Toast.LENGTH_SHORT).show()
+        val tempUnit = sharedPreferences.getBoolean("temperature_unit",  false)
+        val windUnit = sharedPreferences.getBoolean("wind_unit",  false)
+        val pressureUnit = sharedPreferences.getBoolean("pressure_unit",  false)
+        val precipitationUnit = sharedPreferences.getBoolean("precipitation_unit",  false)
+        val visibilityUnit = sharedPreferences.getBoolean("visibility_unit",  false)
+        val gustUnit = sharedPreferences.getBoolean("gust_unit",  false)
 
         weatherViewModel.weatherLiveData.observe(viewLifecycleOwner){weather ->
+            if(weather.current.is_day == 1){
+                binding.weatherLL.background = ResourcesCompat.getDrawable(resources,R.drawable.day,null)
+            }else{
+                binding.weatherLL.background = ResourcesCompat.getDrawable(resources,R.drawable.night,null)
+            }
             binding.locText.text = weather.location.name + ", " + weather.location.region + ", " + weather.location.country
 
             //for celsius use \u2103 and for fahrenheit use \u2109
 
-            binding.tempText.text = weather.current.temp_c.toString() + " \u2103"
-            binding.feelText.text = "Feels like " + weather.current.feelslike_c.toString() + " \u2103"
+            if(tempUnit){
+                binding.tempText.text = weather.current.temp_f.toString() + " \u2109"
+                binding.feelText.text = "Feels like " + weather.current.feelslike_f.toString() + " \u2109"
+            }else{
+                binding.tempText.text = weather.current.temp_c.toString() + " \u2103"
+                binding.feelText.text = "Feels like " + weather.current.feelslike_c.toString() + " \u2103"
+            }
+
+            if(windUnit){
+                binding.windText.text = weather.current.wind_mph.toString() + " M/H"
+            }else{
+                binding.windText.text = weather.current.wind_kph.toString() + " KM/H"
+            }
+
+            if(pressureUnit){
+                binding.pressureText.text = weather.current.pressure_mb.toString() + " mb"
+            }else{
+                binding.pressureText.text = weather.current.pressure_in.toString() + " in"
+            }
+
+            if(precipitationUnit){
+                binding.precipText.text = weather.current.precip_in.toString() + " in"
+            }else{
+                binding.precipText.text = weather.current.precip_mm.toString() + " mm"
+            }
+
+            if(visibilityUnit){
+                binding.visiText.text = weather.current.vis_miles.toString() + " Miles"
+            }else{
+                binding.visiText.text = weather.current.vis_km.toString() + " KM"
+            }
+
+            if(gustUnit){
+                binding.gustText.text = weather.current.gust_mph.toString() + " M/H"
+            }else{
+                binding.gustText.text = weather.current.gust_kph.toString() + " KM/H"
+            }
             binding.conditionText.text = weather.current.condition.text
-            binding.windText.text = weather.current.wind_kph.toString() + " KM/H"
-            binding.pressureText.text = weather.current.pressure_in.toString() + " in"
-            binding.precipText.text = weather.current.precip_mm.toString() + " mm"
-            binding.visiText.text = weather.current.vis_km.toString() + " KM"
             binding.humiText.text = weather.current.humidity.toString() + " %"
-            binding.gustText.text = weather.current.gust_kph.toString() + " KM/H"
+
             Glide.with(this).load("https:"+weather.current.condition.icon).into(binding.iconImage)
         }
     }
