@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,7 +82,8 @@ class WeatherFragment : Fragment() {
                 locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER, 5000, 5f
                 ) { location ->
-                    weatherViewModel.getWeather(RetrofitProvider.retrofit,repository,key,location.toString())
+                    val location = location.latitude.toString() + "," + location.longitude.toString()
+                    weatherViewModel.getWeather(RetrofitProvider.retrofit,repository,key,location)
                 }
             } else {
                 Toast.makeText(context, "Please turn on your location.", Toast.LENGTH_SHORT).show()
