@@ -62,12 +62,13 @@ class WeatherFragment : Fragment() {
 
         binding.favBtn.setOnClickListener {
             val city = binding.locText.text.toString().trim()
-            val cityArray: MutableList<String>? = null
-            cityArray?.add(city)
-            val sharedPref = context?.getSharedPreferences("CITY_PREF",Context.MODE_PRIVATE)
-            val editor = sharedPref?.edit()
-            editor?.putStringSet("cities", cityArray as MutableSet<String>)
-            editor?.commit()
+            weatherViewModel.addCity(requireContext(), city)
+        //         val cityArray: MutableList<String>? = null
+ //           cityArray?.add(city)
+//            val sharedPref = context?.getSharedPreferences("CITY_PREF",Context.MODE_PRIVATE)
+//            val editor = sharedPref?.edit()
+//            editor?.putStringSet("cities", cityArray as MutableSet<String>)
+//            editor?.commit()
         }
 
         listenLiveData()
